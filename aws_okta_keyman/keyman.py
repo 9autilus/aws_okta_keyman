@@ -437,7 +437,7 @@ class Keyman:
         retries = 0
         while True:
             # If we have a session and it's valid take a nap
-            if session and session.is_valid:
+            if False:  # session and session.is_valid:
                 self.log.debug('Credentials are still valid, sleeping')
                 time.sleep(60)
                 retries = 0
@@ -484,7 +484,9 @@ class Keyman:
             if not self.config.reup:
                 return self.wrap_up(session)
 
-            self.log.info('Reup enabled, sleeping... 💤')
+            sleep_seconds = 300  # Sleep this many seconds
+            self.log.info(f'Reup enabled, sleeping {sleep_seconds:,} seconds... 💤')
+            time.sleep(sleep_seconds)
 
     def wrap_up(self, session):
         """ Execute any final steps when we're not in reup mode
