@@ -41,6 +41,7 @@ class Config:
         self.accounts = None
         self.username = None
         self.reup = None
+        self.reup2 = None
         self.debug = None
         self.appid = None
         self.duo_factor = None
@@ -222,6 +223,10 @@ class Config:
                                    help=(
                                        'Automatically re-up the AWS creds '
                                        'before they expire.'
+                                   ), default=0)
+        optional_args.add_argument('-r2', '--reup2', required=False, type=int,
+                                   help=(
+                                       'Re-fetch the AWS creds after this many minutes'
                                    ), default=0)
         optional_args.add_argument('-d', '--duo_factor', type=str,
                                    help=(

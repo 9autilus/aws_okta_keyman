@@ -481,12 +481,16 @@ class Keyman:
                 self.log.fatal(msg)
                 return 4
 
-            if not self.config.reup:
+            if self.config.reup:
+                sleep_seconds = 300  # Sleep this many seconds
+                self.log.info(f'Reup enabled, sleeping {sleep_seconds:,} seconds... 💤')
+                time.sleep(sleep_seconds)
+            elif self.config.reup2:
+                sleep_minutes = self.config.reup2  # Sleep this many minutes
+                self.log.info(f'Reup enabled, sleeping {sleep_minutes:,} minutes... 💤')
+                time.sleep(sleep_minutes * 60)
+            else:
                 return self.wrap_up(session)
-
-            sleep_seconds = 300  # Sleep this many seconds
-            self.log.info(f'Reup enabled, sleeping {sleep_seconds:,} seconds... 💤')
-            time.sleep(sleep_seconds)
 
     def wrap_up(self, session):
         """ Execute any final steps when we're not in reup mode
